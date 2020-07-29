@@ -10,6 +10,7 @@ STYLE_CHOICES = sorted([(item, item) for item in get_all_styles()])"""
 
 class Pokemon2(models.Model):
     #id_pokemon
+    pokedex_number = models.IntegerField()
     name_pokemon = models.CharField(max_length=100)
     experience_growt = models.IntegerField()
     attack = models.IntegerField()
