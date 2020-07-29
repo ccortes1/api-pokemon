@@ -11,6 +11,7 @@ urlpatterns = [
     re_path(r'^pokemon/defense/$', views.PokemonDefense.as_view()),
     re_path(r'^pokemon/type/$', views.PokemonType.as_view()),
     re_path(r'^pokemon/predict/$', views.PokemonPredictLegendary.as_view()),
+    re_path(r'^pokemon/legendary/$', views.PokemonLegendary.as_view()),
 ]
 
 

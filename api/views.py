@@ -85,6 +85,15 @@ class PokemonPredictLegendary(generics.ListAPIView):
         return self.queryset.filter(predict_is_legendary_2=value)
 
 
+class PokemonLegendary(generics.ListAPIView):
+    queryset = Pokemon2.objects.all()
+    serializer_class = Pokemon2Serializer
+
+    def get_queryset(self, *arg, **kwargs):
+        value = self.request.query_params.get('is_legendary', None)
+        print(value)
+        return self.queryset.filter(is_legendary=value)
+
 
         
         
