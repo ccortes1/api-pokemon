@@ -44,11 +44,15 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django_filters',
+    'corsheaders',
     'api.apps.ApiConfig',
 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -59,6 +63,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'pokemon.urls'
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [
     {
@@ -136,6 +141,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# desactivando el cors 
 
 # Heroku: Update database configuration from $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=500)
