@@ -6,7 +6,7 @@ class Pokemon2Serializer(serializers.ModelSerializer):
         model = Pokemon
         fields = [
             'id',
-            'pokedex_number',
+            #'pokedex_number',
             'name_pokemon',
             'experience_growt',
             'attack',
