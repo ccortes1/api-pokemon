@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import dj_database_url
 import os
 import django_heroku
+import dj_database_url
+from decouple import config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,14 +24,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'wl+f(_5oq#wt)s3zlv)9+@_n9+4rm$$a5n3(45utxd0jz#q(f+'
-SECRET_KEY = os.environ.get(
-    'DJANGO_SECRET_KEY', 'wl+f(_5oq#wt)s3zlv)9+@_n9+4rm$$a5n3(45utxd0jz#q(f+')
+SECRET_KEY = config('SECRET_KEY', default='wl+f(_5oq#wt)s3zlv)9+@_n9+4rm$$a5n3(45utxd0jz#q(f+')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -89,12 +90,8 @@ WSGI_APPLICATION = 'pokemon.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pokemon',
-        'USER':'',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -150,3 +147,6 @@ DATABASES['default'].update(db_from_env)
 
 # Activate Django-Heroku
 django_heroku.settings(locals())
+
+if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
+    from .settings_production import *

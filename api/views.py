@@ -98,24 +98,4 @@ class PokemonLegendary(generics.ListAPIView):
         
         
 
-"""
-def pokemon_list(request):
-    
-    pokemons = Pokemon2.objects.all()
-    serializer = Pokemon2Serializer(pokemons, many=True)
-
-    return JsonResponse(serializer.data, safe=False)
-
-def pokemon_detail(request, name_pokemon):
-    try:
-        pokemon = Pokemon2.objects.get(name_pokemon=name_pokemon)
-    except Pokemon.DoesNotExist:
-        return HttpResponse(status=404)
-
-    serializer = Pokemon2Serializer(pokemon)
-    
-    return JsonResponse(serializer.data)
-"""
-
-
 
